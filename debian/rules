@@ -1,0 +1,36 @@
+#!/usr/bin/make -f
+
+# Copyright 2009, Noah Slater <nslater@tumbolia.org>
+
+# Copying and distribution of this file, with or without modification, are
+# permitted in any medium without royalty provided the copyright notice and this
+# notice are preserved.
+
+export PYBUILD_NAME=werkzeug
+export PYBUILD_TEST_PYTEST=1
+# disable some tests as pytest.xprocess is not yet packaged
+export PYBUILD_TEST_ARGS={dir}/tests -k-tests/contrib/test_cache.py
+
+%:
+	dh $@ --with python2,python3,sphinxdoc --buildsystem pybuild
+
+override_dh_auto_clean:
+	make -C docs clean
+	rm -rf build Werkzeug.egg-info/
+	#find $(CURDIR) \( -name '\._*' -o -name '\.DS_Store' \) -delete
+	dh_auto_clean
+
+override_dh_auto_test:
+# don't use memcached, not in main
+	set -ex; \
+		memcached -p 11211 -l 127.0.0.1 & \
+		trap "kill $$! || true" EXIT
+	http_proxy='' LC_ALL=C.UTF-8 dh_auto_test
+
+override_dh_auto_install:
+	dh_auto_install
+	make documentation
+
+override_dh_fixperms:
+	find debian/ -name '*\.png' -exec chmod -x '{}' \;
+	dh_fixperms
