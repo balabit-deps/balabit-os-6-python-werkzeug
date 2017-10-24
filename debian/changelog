@@ -1,3 +1,12 @@
+python-werkzeug (0.10.4+dfsg1-1ubuntu1.1) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: Cross-site vulnerability in render_full function allows
+    attackers to inject arbitrary script or HTML.
+    - debian/patches/CVE-2016-10516.patch: in werkzeub/debug/tbtools.py.
+    - CVE-2016-10516
+
+ -- Leonidas S. Barbosa <leo.barbosa@canonical.com>  Tue, 24 Oct 2017 17:16:25 -0300
+
 python-werkzeug (0.10.4+dfsg1-1ubuntu1) wily; urgency=medium
 
   * Merge with Debian; remaining changes:
