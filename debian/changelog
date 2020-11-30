@@ -1,3 +1,12 @@
+python-werkzeug (0.10.4+dfsg1-1ubuntu1.2) xenial-security; urgency=medium
+
+  * SECURITY UPDATE: Open redirect vulnerability
+    - debian/patches/CVE-2020-28724.patch: serving absolute request URLs,
+      adding tests werkzeug/serving.py, tests/test_serving.py.
+    - CVE-2020-28724
+
+ -- Leonidas S. Barbosa <leo.barbosa@canonical.com>  Mon, 30 Nov 2020 10:37:20 -0300
+
 python-werkzeug (0.10.4+dfsg1-1ubuntu1.1) xenial-security; urgency=medium
 
   * SECURITY UPDATE: Cross-site vulnerability in render_full function allows

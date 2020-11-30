@@ -1,2 +1,3 @@
 drop_ubuntu_font.patch
 CVE-2016-10516.patch
+CVE-2020-28724.patch
